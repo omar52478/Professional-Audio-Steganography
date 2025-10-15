@@ -299,16 +299,6 @@ This project is licensed under the **MIT License** - see the `LICENSE` file for 
 
 -----
 
-## 📞 Support
-
-If you encounter issues or have questions:
-
-1.  Check the **Troubleshooting** section above.
-2.  Review existing [Issues](https://github.com/omar52478/Professional-Audio-Steganography/issues) to see if your problem has already been reported.
-3.  Create a new issue with detailed information, including steps to reproduce the problem.
-
------
-
 ## 🌟 Acknowledgments
 
   - **CustomTkinter**: For the modern GUI framework.
