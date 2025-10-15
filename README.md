@@ -11,7 +11,9 @@
 
 ## 📸 Screenshot
 
-![ProStego GUI](https://img.shields.io/badge/GUI-CustomTkinter-blue?style=flat-square)
+<!-- ![ProStego GUI](https://img.shields.io/badge/GUI-CustomTkinter-blue?style=flat-square) -->
+![ProStego GUI](https://github.com/omar52478/Professional-Audio-Steganography/blob/main/gui-screenshot.png)
+![ProStego GUI](gui-screenshot.png)
 
 *A modern desktop application with an intuitive interface for hiding and extracting data from audio files.*
 
