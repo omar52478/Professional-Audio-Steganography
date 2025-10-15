@@ -4,7 +4,7 @@
 # 🔊 Professional Audio Steganography Tool (ProStego)
 
 ![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
-<!-- ![License](https://img.shields.io/badge/license-MIT-green) -->
+![License](https://img.shields.io/badge/license-MIT-green)
 ![Status](https://img.shields.io/badge/status-Active%20Development-brightgreen)
 
 
@@ -12,7 +12,7 @@
 ## 📸 Screenshot
 
 <!-- ![ProStego GUI](https://img.shields.io/badge/GUI-CustomTkinter-blue?style=flat-square) -->
-![ProStego GUI](https://github.com/omar52478/Professional-Audio-Steganography/blob/main/gui-screenshot.png)
+<!-- ![ProStego GUI](https://github.com/omar52478/Professional-Audio-Steganography/blob/main/gui-screenshot.png) -->
 ![ProStego GUI](gui-screenshot.png)
 
 *A modern desktop application with an intuitive interface for hiding and extracting data from audio files.*
