@@ -1,318 +1,633 @@
-# 🔊 Professional Audio Steganography Tool (ProStego)# 🔊 Professional Audio Steganography Tool (ProStego)
+# 🔊 Professional Audio Steganography Tool (ProStego)# 🔊 Professional Audio Steganography Tool (ProStego)# 🔊 Professional Audio Steganography Tool (ProStego)
 
 
 
-![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
 
-![License](https://img.shields.io/badge/license-MIT-green)![License](https://img.shields.io/badge/license-MIT-green)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-![Status](https://img.shields.io/badge/status-Active%20Development-brightgreen)![Status](https://img.shields.io/badge/status-Active%20Development-brightgreen)
+![Status](https://img.shields.io/badge/status-Active%20Development-brightgreen)![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
 
 
+
+---![License](https://img.shields.io/badge/license-MIT-green)![License](https://img.shields.io/badge/license-MIT-green)
+
+
+
+## 📸 Screenshot![Status](https://img.shields.io/badge/status-Active%20Development-brightgreen)![Status](https://img.shields.io/badge/status-Active%20Development-brightgreen)
+
+
+
+![ProStego GUI](https://img.shields.io/badge/GUI-CustomTkinter-blue?style=flat-square)
+
+
+
+*A modern desktop application with intuitive interface for hiding and extracting data from audio files.*------
+
+
+
+---
+
+
+
+## ✨ Features## 📸 Screenshot## 📸 Screenshot
+
+
+
+- 🎵 **Audio Steganography**: Hide files and text inside WAV audio files using LSB (Least Significant Bit) technique
+
+- 🔐 **Secure Encryption**: AES-256 encryption with PBKDF2 key derivation and password protection
+
+- 📦 **Data Compression**: Automatic compression using zlib to maximize storage capacity![ProStego GUI](https://img.shields.io/badge/GUI-CustomTkinter-blue?style=flat-square)![ProStego GUI](https://img.shields.io/badge/GUI-CustomTkinter-blue?style=flat-square)
+
+- 🎨 **Modern GUI**: Beautiful, user-friendly interface built with CustomTkinter
+
+- 👁️ **Real-time Preview**: View audio waveforms, images, and text before hiding/extracting
+
+- 🎶 **Audio Player**: Built-in player to preview audio files with play/stop controls
+
+- 📄 **Multi-format Support**: Hide any file type (PDF, images, text, documents, etc.)*A modern desktop application with intuitive interface for hiding and extracting data from audio files.**A modern desktop application with intuitive interface for hiding and extracting data from audio files.*
+
+- ⚙️ **Progress Tracking**: Real-time progress bar and logging console
+
+- 🌙 **Dark Theme**: Modern dark mode interface for comfortable viewing
+
+- ✅ **Data Validation**: Ensures data integrity and safety
 
 ------
 
-
-
-## 📸 Screenshot## 📸 Screenshot
-
-
-
-![ProStego GUI](https://img.shields.io/badge/GUI-CustomTkinter-blue?style=flat-square)![ProStego GUI](https://img.shields.io/badge/GUI-CustomTkinter-blue?style=flat-square)
+---
 
 
 
-*A modern desktop application with intuitive interface for hiding and extracting data from audio files.**A modern desktop application with intuitive interface for hiding and extracting data from audio files.*
-
-
-
-------
-
-
+## 🔧 How It Works
 
 ## ✨ Features## ✨ Features
 
+### LSB (Least Significant Bit) Steganography
 
+
+
+The application uses LSB steganography to hide data imperceptibly within audio files:
 
 - 🎵 **Audio Steganography**: Hide files and text inside WAV audio files using LSB (Least Significant Bit) technique- 🎵 **Audio Steganography**: Hide files and text inside WAV audio files using LSB (Least Significant Bit) technique
 
-- 🔐 **Secure Encryption**: AES-256 encryption with PBKDF2 key derivation and password protection- 🔐 **Secure Encryption**: AES-256 encryption with PBKDF2 key derivation and password protection
+```
 
-- 📦 **Data Compression**: Automatic compression using zlib to maximize storage capacity- 📦 **Data Compression**: Automatic compression using zlib to maximize storage capacity
+Original byte:  10110101- 🔐 **Secure Encryption**: AES-256 encryption with PBKDF2 key derivation and password protection- 🔐 **Secure Encryption**: AES-256 encryption with PBKDF2 key derivation and password protection
+
+After hiding:   10110100  (LSB changed from 1 to 0)
+
+Audio quality:  Imperceptible to human ear ✓- 📦 **Data Compression**: Automatic compression using zlib to maximize storage capacity- 📦 **Data Compression**: Automatic compression using zlib to maximize storage capacity
+
+```
 
 - 🎨 **Modern GUI**: Beautiful, user-friendly interface built with CustomTkinter- 🎨 **Modern GUI**: Beautiful, user-friendly interface built with CustomTkinter
 
+Each audio sample's least significant bit is modified to store data bits. This creates minimal audio degradation while allowing large data storage.
+
 - 👁️ **Real-time Preview**: View audio waveforms, images, and text before hiding/extracting- 👁️ **Real-time Preview**: View audio waveforms, images, and text before hiding/extracting
+
+### Data Flow
 
 - 🎶 **Audio Player**: Built-in player to preview audio files with play/stop controls- 🎶 **Audio Player**: Built-in player to preview audio files with play/stop controls
 
-- 📄 **Multi-format Support**: Hide any file type (PDF, images, text, documents, etc.)- 📄 **Multi-format Support**: Hide any file type (PDF, images, text, documents, etc.)
+**Hiding Process:**
 
-- ⚙️ **Progress Tracking**: Real-time progress bar and logging console- ⚙️ **Progress Tracking**: Real-time progress bar and logging console
+```- 📄 **Multi-format Support**: Hide any file type (PDF, images, text, documents, etc.)- 📄 **Multi-format Support**: Hide any file type (PDF, images, text, documents, etc.)
 
-- 🌙 **Dark Theme**: Modern dark mode interface for comfortable viewing- 🌙 **Dark Theme**: Modern dark mode interface for comfortable viewing
+Secret Data → Compress → Encrypt → Add Header → Insert into Audio (LSB) → Output File
 
-- ✅ **Data Validation**: Ensures data integrity and safety- ✅ **Data Validation**: Ensures data integrity and safety
+```- ⚙️ **Progress Tracking**: Real-time progress bar and logging console- ⚙️ **Progress Tracking**: Real-time progress bar and logging console
 
 
+
+**Extraction Process:**- 🌙 **Dark Theme**: Modern dark mode interface for comfortable viewing- 🌙 **Dark Theme**: Modern dark mode interface for comfortable viewing
+
+```
+
+Stego Audio → Extract LSB Bits → Remove Header → Decrypt → Decompress → Recover Data- ✅ **Data Validation**: Ensures data integrity and safety- ✅ **Data Validation**: Ensures data integrity and safety
+
+```
+
+
+
+### Custom Metadata Header
 
 ------
 
+The header structure stores essential information:
 
 
-## 🔧 How It Works## 🔧 How It Works
 
+| Field | Size (bytes) | Purpose | Example |
 
+|-------|--------------|---------|---------|## 🔧 How It Works## 🔧 How It Works
+
+| Flags | 1 | Compression & Encryption status | `0x03` (both enabled) |
+
+| Filename | 255 | Original filename | `document.pdf` |
+
+| Original Size | 4 | Uncompressed data size | `1048576` |
 
 ### LSB (Least Significant Bit) Steganography### LSB (Least Significant Bit) Steganography
 
-
-
-The application uses LSB steganography to hide data imperceptibly within audio files:The application uses LSB steganography to hide data imperceptibly within audio files:
+### Encryption Pipeline
 
 
 
-``````
+```
 
-Original byte:  10110101Original byte:  10110101
+Password InputThe application uses LSB steganography to hide data imperceptibly within audio files:The application uses LSB steganography to hide data imperceptibly within audio files:
 
-After hiding:   10110100  (LSB changed from 1 to 0)After hiding:   10110100  (LSB changed from 1 to 0)
+    ↓
+
+PBKDF2 Key Derivation (100,000 iterations)
+
+    ↓
+
+Strong 256-bit Key Generated``````
+
+    ↓
+
+Fernet AES Encryption AppliedOriginal byte:  10110101Original byte:  10110101
+
+    ↓
+
+Encrypted Data with SaltAfter hiding:   10110100  (LSB changed from 1 to 0)After hiding:   10110100  (LSB changed from 1 to 0)
+
+```
 
 Audio quality:  Imperceptible to human ear ✓Audio quality:  Imperceptible to human ear ✓
 
+---
+
 ``````
 
-
-
-Each audio sample's least significant bit is modified to store data bits. This creates minimal audio degradation while allowing large data storage.Each audio sample's least significant bit is modified to store data bits. This creates minimal audio degradation while allowing large data storage.
+## 🛠️ Technologies & Libraries
 
 
 
-### Data Flow### Data Flow
+| Technology | Version | Purpose |
 
+|-----------|---------|---------|Each audio sample's least significant bit is modified to store data bits. This creates minimal audio degradation while allowing large data storage.Each audio sample's least significant bit is modified to store data bits. This creates minimal audio degradation while allowing large data storage.
 
+| **Python** | 3.8+ | Core programming language |
+
+| **CustomTkinter** | 5.2.2 | Modern GUI framework |
+
+| **cryptography** | 46.0.2 | AES/Fernet encryption |
+
+| **pydub** | 0.25.1 | Audio file handling |### Data Flow### Data Flow
+
+| **matplotlib** | 3.10.7 | Waveform visualization |
+
+| **simpleaudio** | 1.0.4 | Audio playback |
+
+| **Pillow** | 12.0.0 | Image processing |
 
 **Hiding Process:****Hiding Process:**
 
+---
+
 ``````
+
+## 📦 Installation
 
 Secret Data → Compress → Encrypt → Add Header → Insert into Audio (LSB) → Output FileSecret Data → Compress → Encrypt → Add Header → Insert into Audio (LSB) → Output File
 
-``````
-
-
-
-**Extraction Process:****Extraction Process:**
+### System Requirements
 
 ``````
 
-Stego Audio → Extract LSB Bits → Remove Header → Decrypt → Decompress → Recover DataStego Audio → Extract LSB Bits → Remove Header → Decrypt → Decompress → Recover Data
+- **Python**: 3.8 or higher
 
-``````
+- **OS**: Windows, macOS, or Linux
+
+- **RAM**: Minimum 2GB (4GB recommended)
+
+- **Storage**: 500MB free space for dependencies**Extraction Process:****Extraction Process:**
 
 
+
+### Step-by-Step Setup``````
+
+
+
+#### 1. Clone the RepositoryStego Audio → Extract LSB Bits → Remove Header → Decrypt → Decompress → Recover DataStego Audio → Extract LSB Bits → Remove Header → Decrypt → Decompress → Recover Data
+
+
+
+```bash``````
+
+git clone https://github.com/omar52478/Professional-Audio-Steganography.git
+
+cd Professional-Audio-Steganography
+
+```
 
 ### Custom Metadata Header### Custom Metadata Header
 
+#### 2. Create Virtual Environment
 
 
-The header structure stores essential information:The header structure stores essential information:
 
+**Windows (PowerShell):**
 
+```powershellThe header structure stores essential information:The header structure stores essential information:
+
+python -m venv venv
+
+.\venv\Scripts\Activate.ps1
+
+```
 
 | Field | Size (bytes) | Purpose | Example || Field | Size (bytes) | Purpose | Example |
 
-|-------|--------------|---------|---------||-------|--------------|---------|---------|
+**Linux/macOS:**
 
-| Flags | 1 | Compression & Encryption status | `0x03` (both enabled) || Flags | 1 | Compression & Encryption status | `0x03` (both enabled) |
+```bash|-------|--------------|---------|---------||-------|--------------|---------|---------|
+
+python3 -m venv venv
+
+source venv/bin/activate| Flags | 1 | Compression & Encryption status | `0x03` (both enabled) || Flags | 1 | Compression & Encryption status | `0x03` (both enabled) |
+
+```
 
 | Filename | 255 | Original filename | `document.pdf` || Filename | 255 | Original filename | `document.pdf` |
 
+#### 3. Install Dependencies
+
 | Original Size | 4 | Uncompressed data size | `1048576` || Original Size | 4 | Uncompressed data size | `1048576` |
 
+```bash
 
+pip install -r requirements.txt
+
+```
 
 ### Encryption Pipeline### Encryption Pipeline
 
+#### 4. Run the Application
 
 
-``````
+
+```bash
+
+python main.py``````
+
+```
 
 Password InputPassword Input
 
+---
+
     ↓    ↓
+
+## 🚀 Usage Guide
 
 PBKDF2 Key Derivation (100,000 iterations)PBKDF2 Key Derivation (100,000 iterations)
 
-    ↓    ↓
-
-Strong 256-bit Key GeneratedStrong 256-bit Key Generated
+### Hiding Data
 
     ↓    ↓
 
-Fernet AES Encryption AppliedFernet AES Encryption Applied
+1. **Select Cover Audio**: Click "Browse" to choose a WAV audio file
 
-    ↓    ↓
+2. **Choose Secret Data**: Strong 256-bit Key GeneratedStrong 256-bit Key Generated
+
+   - Select "File" to hide any file type
+
+   - Or select "Text" to hide plain text    ↓    ↓
+
+3. **Configure Options**:
+
+   - Set optional password for encryptionFernet AES Encryption AppliedFernet AES Encryption Applied
+
+   - Check "Compress data" for better capacity (recommended)
+
+4. **Hide Data**: Click "Start Hiding" and choose output location    ↓    ↓
+
+5. **Success**: Your stego audio file is ready to share!
 
 Encrypted Data with SaltEncrypted Data with Salt
 
+### Extracting Data
+
 ``````
 
+1. **Select Stego Audio**: Choose the audio file containing hidden data
 
+2. **Enter Password**: If encryption was used, enter the password
 
-------
+3. **Extract & Preview**: Click to extract and preview the data
 
-
-
-## 🛠️ Technologies & Libraries## 🛠️ Technologies & Libraries
-
-
-
-| Technology | Version | Purpose || Technology | Version | Purpose |
-
-|-----------|---------|---------||-----------|---------|---------|
-
-| **Python** | 3.8+ | Core programming language || **Python** | 3.8+ | Core programming language |
-
-| **CustomTkinter** | 5.2.2 | Modern GUI framework || **CustomTkinter** | 5.2.2 | Modern GUI framework |
-
-| **cryptography** | 46.0.2 | AES/Fernet encryption || **cryptography** | 46.0.2 | AES/Fernet encryption |
-
-| **pydub** | 0.25.1 | Audio file handling || **pydub** | 0.25.1 | Audio file handling |
-
-| **matplotlib** | 3.10.7 | Waveform visualization || **matplotlib** | 3.10.7 | Waveform visualization |
-
-| **simpleaudio** | 1.0.4 | Audio playback || **simpleaudio** | 1.0.4 | Audio playback |
-
-| **Pillow** | 12.0.0 | Image processing || **Pillow** | 12.0.0 | Image processing |
+4. **Save Data**: Click "Save to Disk" to save the recovered file------
 
 
 
-------
+---
 
 
 
-## 📦 Installation## 📦 Installation
+## 📁 Project Structure## 🛠️ Technologies & Libraries## 🛠️ Technologies & Libraries
 
 
+
+```
+
+ProStegoApp/
+
+├── main.py                 # Main GUI application entry point| Technology | Version | Purpose || Technology | Version | Purpose |
+
+├── logic.py               # LSB hiding and extraction core logic
+
+├── security.py            # Encryption/decryption functions|-----------|---------|---------||-----------|---------|---------|
+
+├── requirements.txt       # Python dependencies
+
+├── README.md             # This file| **Python** | 3.8+ | Core programming language || **Python** | 3.8+ | Core programming language |
+
+│
+
+├── ui/| **CustomTkinter** | 5.2.2 | Modern GUI framework || **CustomTkinter** | 5.2.2 | Modern GUI framework |
+
+│   ├── __init__.py
+
+│   └── widgets.py        # Custom GUI components (FileInputFrame)| **cryptography** | 46.0.2 | AES/Fernet encryption || **cryptography** | 46.0.2 | AES/Fernet encryption |
+
+│
+
+└── utils/| **pydub** | 0.25.1 | Audio file handling || **pydub** | 0.25.1 | Audio file handling |
+
+    ├── __init__.py
+
+    ├── audio_player.py   # Audio playback functionality| **matplotlib** | 3.10.7 | Waveform visualization || **matplotlib** | 3.10.7 | Waveform visualization |
+
+    └── preview_handler.py # File preview generators (waveform, images, text)
+
+```| **simpleaudio** | 1.0.4 | Audio playback || **simpleaudio** | 1.0.4 | Audio playback |
+
+
+
+---| **Pillow** | 12.0.0 | Image processing || **Pillow** | 12.0.0 | Image processing |
+
+
+
+## ⚙️ Advanced Features
+
+
+
+### Capacity Calculation------
+
+
+
+Maximum data capacity depends on audio file size:
+
+
+
+- **Capacity Formula**: `Audio file size (bytes) ÷ 8`## 📦 Installation## 📦 Installation
+
+- **Example**: 10MB WAV file can hide ~1.25MB of data (with compression)
+
+
+
+### Security Best Practices
 
 ### System Requirements### System Requirements
 
+**✅ Do:**
 
+- Use strong passwords (12+ characters with mixed case, numbers, symbols)
 
-- **Python**: 3.8 or higher- **Python**: 3.8 or higher
+- Store stego files safely
+
+- Verify file integrity before extraction- **Python**: 3.8 or higher- **Python**: 3.8 or higher
+
+- Keep backup copies of original audio
 
 - **OS**: Windows, macOS, or Linux- **OS**: Windows, macOS, or Linux
 
-- **RAM**: Minimum 2GB (4GB recommended)- **RAM**: Minimum 2GB (4GB recommended)
+**❌ Don't:**
 
-- **Storage**: 500MB free space for dependencies- **Storage**: 500MB free space for dependencies
+- Use weak passwords- **RAM**: Minimum 2GB (4GB recommended)- **RAM**: Minimum 2GB (4GB recommended)
+
+- Share stego files without protection
+
+- Delete original audio files immediately- **Storage**: 500MB free space for dependencies- **Storage**: 500MB free space for dependencies
+
+- Ignore error messages
 
 
+
+### Supported File Types
 
 ### Step-by-Step Setup### Step-by-Step Setup
 
+**For Hiding:**
+
+- Documents: PDF, DOCX, TXT, etc.
+
+- Images: PNG, JPG, GIF, BMP
+
+- Audio: MP3 files (as text data)#### 1. Clone the Repository#### 1. Clone the Repository
+
+- Any binary file type
 
 
-#### 1. Clone the Repository#### 1. Clone the Repository
 
+**Cover Audio:**
 
+- WAV files (primary support)```bash```bash
 
-```bash```bash
+- Higher quality audio = more data capacity
 
 git clone https://github.com/omar52478/Professional-Audio-Steganography.gitgit clone https://github.com/omar52478/Professional-Audio-Steganography.git
 
+---
+
 cd Professional-Audio-Steganographycd Professional-Audio-Steganography
+
+## 🐛 Troubleshooting
 
 ``````
 
+### Issue: "Cover audio is too small to hide this data"
 
+
+
+**Solution:** Use a larger audio file or enable compression
 
 #### 2. Create Virtual Environment#### 2. Create Virtual Environment
 
+### Issue: "pydub is not installed"
 
+
+
+**Solution:** Run `pip install pydub` and ensure FFmpeg is installed
 
 **Windows (PowerShell):****Windows (PowerShell):**
 
+### Issue: "Decryption failed - Incorrect password"
+
 ```powershell```powershell
+
+**Solution:** Verify the password is correct and case-sensitive
 
 python -m venv venvpython -m venv venv
 
+### Issue: Audio playback not working
+
 .\venv\Scripts\Activate.ps1.\venv\Scripts\Activate.ps1
 
-``````
+**Solution:** Install FFmpeg on your system:
+
+- **Windows**: `choco install ffmpeg```````
+
+- **macOS**: `brew install ffmpeg`
+
+- **Linux**: `sudo apt-get install ffmpeg`
 
 
 
-**Linux/macOS:****Linux/macOS:**
-
-```bash```bash
-
-python3 -m venv venvpython3 -m venv venv
-
-source venv/bin/activatesource venv/bin/activate
-
-``````
+---**Linux/macOS:****Linux/macOS:**
 
 
 
-#### 3. Install Dependencies#### 3. Install Dependencies
+## 🤝 Contributing```bash```bash
 
 
 
-```bash```bash
+Contributions are welcome! To contribute:python3 -m venv venvpython3 -m venv venv
+
+
+
+1. Fork the repositorysource venv/bin/activatesource venv/bin/activate
+
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+
+3. Commit your changes (`git commit -m 'Add amazing feature'`)``````
+
+4. Push to the branch (`git push origin feature/amazing-feature`)
+
+5. Open a Pull Request
+
+
+
+### Code Style#### 3. Install Dependencies#### 3. Install Dependencies
+
+
+
+- Follow PEP 8 conventions
+
+- Use meaningful variable names
+
+- Add comments for complex logic```bash```bash
+
+- Test thoroughly before submitting
 
 pip install -r requirements.txtpip install -r requirements.txt
 
+---
+
 ``````
 
+## 📄 License
 
+
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 #### 4. Run the Application#### 4. Run the Application
 
+**You are free to:**
 
+- ✅ Use commercially
 
-```bash```bash
+- ✅ Modify and distribute
+
+- ✅ Use privately```bash```bash
+
+- ⚠️ Include license and copyright notice
 
 python main.pypython main.py
 
+---
+
 ``````
 
+## 👨‍💻 Author
 
 
-------
+
+**Omar Ahmed** (@omar52478)
+
+- GitHub: [omar52478](https://github.com/omar52478)------
+
+- Project: [Professional Audio Steganography](https://github.com/omar52478/Professional-Audio-Steganography)
 
 
+
+---
 
 ## 🚀 Usage Guide## 🚀 Usage Guide
 
+## 📞 Support
 
+
+
+If you encounter issues or have questions:
 
 ### Hiding Data### Hiding Data
 
+1. Check the **Troubleshooting** section
 
+2. Review existing [Issues](https://github.com/omar52478/Professional-Audio-Steganography/issues)
+
+3. Create a new issue with detailed information
 
 1. **Select Cover Audio**: Click "Browse" to choose a WAV audio file1. **Select Cover Audio**: Click "Browse" to choose a WAV audio file
 
+---
+
 2. **Choose Secret Data**: 2. **Choose Secret Data**: 
+
+## 🌟 Acknowledgments
 
    - Select "File" to hide any file type   - Select "File" to hide any file type
 
-   - Or select "Text" to hide plain text   - Or select "Text" to hide plain text
+- **CustomTkinter**: Modern GUI framework
 
-3. **Configure Options**:3. **Configure Options**:
+- **pydub**: Audio file processing   - Or select "Text" to hide plain text   - Or select "Text" to hide plain text
 
-   - Set optional password for encryption   - Set optional password for encryption
+- **cryptography**: Secure encryption library
 
-   - Check "Compress data" for better capacity (recommended)   - Check "Compress data" for better capacity (recommended)
-
-4. **Hide Data**: Click "Start Hiding" and choose output location4. **Hide Data**: Click "Start Hiding" and choose output location
-
-5. **Success**: Your stego audio file is ready to share!5. **Success**: Your stego audio file is ready to share!
+- Community feedback and contributions3. **Configure Options**:3. **Configure Options**:
 
 
 
-### Extracting Data### Extracting Data
+---   - Set optional password for encryption   - Set optional password for encryption
+
+
+
+## 📚 Learn More   - Check "Compress data" for better capacity (recommended)   - Check "Compress data" for better capacity (recommended)
+
+
+
+- [Steganography on Wikipedia](https://en.wikipedia.org/wiki/Steganography)4. **Hide Data**: Click "Start Hiding" and choose output location4. **Hide Data**: Click "Start Hiding" and choose output location
+
+- [Cryptography Basics](https://en.wikipedia.org/wiki/Cryptography)
+
+- [Python Documentation](https://docs.python.org/3/)5. **Success**: Your stego audio file is ready to share!5. **Success**: Your stego audio file is ready to share!
+
+
+
+---
+
+
+
+**Made with ❤️ for secure data hiding and audio steganography enthusiasts**### Extracting Data### Extracting Data
+
 
 
 
