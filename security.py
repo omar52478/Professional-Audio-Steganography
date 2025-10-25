@@ -1,41 +1,94 @@
 # security.py
 import os
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.backends import default_backend
-from cryptography.fernet import Fernet
-import base64
+from Crypto.Protocol.KDF import PBKDF2
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+from Crypto.Hash import SHA256
 
-def derive_key(password: str, salt: bytes) -> bytes:
-    """Derives a cryptographic key from a password and salt."""
-    kdf = PBKDF2HMAC(
-        algorithm=hashes.SHA256(),
-        length=32,
-        salt=salt,
-        iterations=100000,
-        backend=default_backend()
-    )
-    return base64.urlsafe_b64encode(kdf.derive(password.encode()))
+# --- Constants for the new professional file format ---
+MAGIC = b"AESGCMv1"      # 8 bytes identifier to recognize our encrypted files
+SALT_SIZE = 16
+NONCE_SIZE = 12         # Recommended 96-bit for GCM
+TAG_SIZE = 16
+KEY_SIZE = 32           # 256-bit key
+PBKDF2_ITERS = 100_000  # Iterations for key derivation
+CHUNK_SIZE = 64 * 1024  # Process files in 64 KB chunks
 
-def encrypt_data(data: bytes, password: str) -> bytes:
-    """Encrypts data with a password."""
-    if not password:
-        return data
-    salt = os.urandom(16)
-    key = derive_key(password, salt)
-    f = Fernet(key)
-    encrypted_data = f.encrypt(data)
-    return salt + encrypted_data # Prepend salt to the encrypted data
+def derive_key(passphrase: str, salt: bytes) -> bytes:
+    """Derives a strong key from a passphrase using PBKDF2."""
+    return PBKDF2(passphrase.encode('utf-8'), salt, dkLen=KEY_SIZE, count=PBKDF2_ITERS, hmac_hash_module=SHA256)
 
-def decrypt_data(encrypted_data_with_salt: bytes, password: str) -> bytes:
-    """Decrypts data with a password."""
-    if not password:
-        return encrypted_data_with_salt
-    try:
-        salt = encrypted_data_with_salt[:16]
-        encrypted_data = encrypted_data_with_salt[16:]
-        key = derive_key(password, salt)
-        f = Fernet(key)
-        return f.decrypt(encrypted_data)
-    except Exception as e:
-        raise ValueError(f"Decryption failed. Incorrect password or corrupted data. Details: {e}")
+def encrypt_file(in_path: str, out_path: str, passphrase: str):
+    """Encrypts a file from in_path to out_path using a streaming approach."""
+    salt = get_random_bytes(SALT_SIZE)
+    key = derive_key(passphrase, salt)
+    nonce = get_random_bytes(NONCE_SIZE)
+    cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
+
+    with open(in_path, 'rb') as fin, open(out_path, 'wb') as fout:
+        # Write the professional header: magic + salt + nonce
+        fout.write(MAGIC)
+        fout.write(salt)
+        fout.write(nonce)
+
+        # Encrypt in chunks (streaming)
+        while True:
+            chunk = fin.read(CHUNK_SIZE)
+            if not chunk:
+                break
+            ct = cipher.encrypt(chunk)
+            fout.write(ct)
+
+        # Finalize and get the authentication tag
+        tag = cipher.digest()
+        fout.write(tag)
+
+def decrypt_file(in_path: str, out_path: str, passphrase: str):
+    """Decrypts a file from in_path to out_path, verifying its integrity."""
+    filesize = os.path.getsize(in_path)
+    header_len = len(MAGIC) + SALT_SIZE + NONCE_SIZE
+    if filesize < header_len + TAG_SIZE:
+        raise ValueError("Input file is too small to be a valid encrypted file.")
+
+    with open(in_path, 'rb') as fin:
+        # Read and verify the header
+        magic = fin.read(len(MAGIC))
+        if magic != MAGIC:
+            raise ValueError("Invalid file format or not an encrypted file (bad magic number).")
+        
+        salt = fin.read(SALT_SIZE)
+        nonce = fin.read(NONCE_SIZE)
+        
+        # Derive the key and set up the cipher
+        key = derive_key(passphrase, salt)
+        cipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
+        
+        # Calculate ciphertext size
+        ciphertext_len = filesize - header_len - TAG_SIZE
+        bytes_left = ciphertext_len
+        
+        # Decrypt in chunks and write to output file
+        with open(out_path, 'wb') as fout:
+            while bytes_left > 0:
+                to_read = min(CHUNK_SIZE, bytes_left)
+                chunk = fin.read(to_read)
+                if not chunk:
+                    raise ValueError("Unexpected end of file while reading ciphertext.")
+                
+                pt = cipher.decrypt(chunk)
+                fout.write(pt)
+                bytes_left -= len(chunk)
+            
+            # Read the tag from the end of the file
+            tag = fin.read(TAG_SIZE)
+            if len(tag) != TAG_SIZE:
+                raise ValueError("Authentication tag is missing or incomplete.")
+            
+            # Verify the tag (this will raise ValueError on mismatch)
+            try:
+                cipher.verify(tag)
+            except ValueError:
+                # If verification fails, delete the partially written (and incorrect) output file
+                fout.close()
+                os.remove(out_path)
+                raise ValueError("Authentication failed: The data is corrupted or the password is incorrect.")

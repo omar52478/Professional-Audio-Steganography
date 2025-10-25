@@ -72,37 +72,34 @@ The header structure stores essential information for data recovery:
 | Filename      | 255          | Original filename             | `document.pdf`          |
 | Original Size | 4            | Uncompressed data size        | `1048576`               |
 
-### Encryption Pipeline
+### Professional Encryption Pipeline
 
-Security is paramount. The encryption process follows robust standards to protect your data.
+The encryption system has been upgraded to use `PyCryptodome` with **AES-256-GCM**, a mode that provides authenticated encryption and is highly efficient for large files.
 
-```
+**Encryption Flow:**
+`Password → [PBKDF2 with Salt & 100,000 Iterations] → Strong Key → [AES-GCM Encryption] → Structured Encrypted File`
 
-Password Input
-↓
-PBKDF2 Key Derivation (100,000 iterations)
-↓
-Strong 256-bit Key Generated
-↓
-Fernet AES Encryption Applied
-↓
-Encrypted Data with Salt
+**Resulting Encrypted File Structure:**
+`[Magic Bytes] + [Salt] + [Nonce] + [Ciphertext] + [Authentication Tag]`
 
-````
+-   **Streaming:** The file is encrypted in chunks instead of being loaded entirely into memory, allowing for the processing of huge files.
+-   **Magic Bytes:** An identifier at the start of the file to verify it was encrypted by our application.
+-   **Authentication Tag:** A security seal at the end of the file. If even a single bit of the data is altered, this tag verification will fail, and we immediately know the data is corrupt.
 
 ---
 
 ## 🛠️ Technologies & Libraries
 
-| Technology      | Version | Purpose                    |
-|-----------------|---------|----------------------------|
-| **Python** | 3.8+    | Core programming language  |
-| **CustomTkinter**| 5.2.2   | Modern GUI framework       |
-| **cryptography**| 46.0.2  | AES/Fernet encryption      |
-| **pydub** | 0.25.1  | Audio file handling        |
-| **matplotlib** | 3.10.7  | Waveform visualization     |
-| **simpleaudio** | 1.0.4   | Audio playback             |
-| **Pillow** | 12.0.0  | Image processing           |
+| Technology      | Version  | Purpose                                                              |
+| --------------- | ---------- | -------------------------------------------------------------------- |
+| **Python** | 3.8+       | The core programming language of the project.                        |
+| **CustomTkinter** | 5.2.2      | For building the modern and attractive GUI.                          |
+| **PyCryptodome**| 3.19.0     | Provides professional AES-GCM encryption and large file handling.    |
+| **pydub** | 0.25.1     | For processing and reading various audio file formats.               |
+| **Matplotlib** | 3.8.0      | For plotting and rendering audio waveforms.                          |
+| **simpleaudio** | 1.0.4      | For playing audio clips directly from within the application.        |
+| **Pillow** | 10.1.0     | For processing and displaying images in the preview pane.              |
+| **FFmpeg** | external   | A crucial tool required by pydub to process MP3 files.               |
 
 ---
 
