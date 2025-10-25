@@ -7,7 +7,9 @@ darkdetect==0.8.0
 fonttools==4.60.1
 kiwisolver==1.4.9
 matplotlib==3.10.7
-numpy==2.3.4
+# numpy 2.x conflicts with scipy's upper bound (numpy<1.28). Use a compatible range
+# that satisfies: contourpy>=1.25, matplotlib>=1.23 and scipy>=1.21.6,<1.28.0
+numpy>=1.25,<1.28
 packaging==25.0
 pillow==12.0.0
 pycparser==2.23
